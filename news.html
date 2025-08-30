@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News - Aidgorithm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --accent: #ffffff;
+            --blue-accent: #0066cc;
+            --green-accent: #00ff88;
+            --purple-accent: #8b5cf6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            line-height: 1.4;
+            color: var(--white);
+            background: var(--black);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+            overflow-x: hidden;
+        }
+
+        /* Typography System */
+        .text-display {
+            font-family: 'SF Pro Display', 'Inter', system-ui, sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.022em;
+        }
+
+        .text-title {
+            font-family: 'SF Pro Text', 'Inter', system-ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.016em;
+        }
+
+        .text-body {
+            font-family: 'SF Pro Text', 'Inter', system-ui, sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.008em;
+        }
+
+        .text-caption {
+            font-family: 'SF Pro Text', 'Inter', system-ui, sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.012em;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: clamp(16px, 3vw, 24px) clamp(20px, 5vw, 48px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid var(--gray-800);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: clamp(20px, 4vw, 26px);
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(24px, 5vw, 48px);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: clamp(14px, 2.5vw, 16px);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--white);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .menu-line {
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+
+        /* Live Status Indicator */
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--green-accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green-accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 clamp(20px, 5vw, 48px);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: clamp(24px, 4vw, 32px);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.2s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 10vw, 88px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.035em;
+            margin-bottom: clamp(24px, 4vw, 32px);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.4s forwards;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--white), var(--gray-300));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 400;
+            color: var(--gray-300);
+            line-height: 1.6;
+            margin-bottom: clamp(32px, 5vw, 48px);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.6s forwards;
+        }
+
+        .last-updated {
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--gray-500);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.8s forwards;
+        }
+
+        /* Floating AI Elements */
+        .floating-ai {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ai-element {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 24px;
+            animation: floatAI 10s ease-in-out infinite;
+        }
+
+        .ai-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .ai-element:nth-child(2) { top: 60%; right: 15%; animation-delay: -3s; }
+        .ai-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: -6s; }
+        .ai-element:nth-child(4) { top: 40%; right: 25%; animation-delay: -9s; }
+
+        @keyframes floatAI {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(-3deg); }
+            75% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* News Filters */
+        .filters {
+            padding: clamp(40px, 8vw, 60px) clamp(20px, 5vw, 48px);
+            background: var(--gray-900);
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .filters-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 4px;
+            background: var(--gray-800);
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .filter-tab {
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--gray-400);
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .filter-tab.active {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .refresh-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--gray-800);
+            color: var(--white);
+            border: 1px solid var(--gray-700);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .refresh-btn:hover {
+            background: var(--gray-700);
+            border-color: var(--gray-600);
+        }
+
+        .refresh-icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.5s ease;
+        }
+
+        .refresh-btn.loading .refresh-icon {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* News Grid */
+        .news-grid {
+            padding: clamp(60px, 10vw, 80px) clamp(20px, 5vw, 48px);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(40px, 6vw, 60px);
+        }
+
+        .news-title {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+            gap: clamp(24px, 4vw, 32px);
+        }
+
+        .article-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gray-600);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--purple-accent), var(--blue-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><line x1="0" y1="10" x2="20" y2="10" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/><line x1="10" y1="0" x2="10" y2="20" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23circuit)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .article-icon {
+            font-size: 48px;
+            z-index: 2;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .article-content {
+            padding: clamp(24px, 4vw, 32px);
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 12px;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .article-category {
+            background: var(--gray-800);
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--gray-700);
+        }
+
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .article-title {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+
+        .article-summary {
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--gray-400);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--gray-800);
+            color: var(--gray-300);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* Featured Article */
+        .featured-section {
+            padding: clamp(80px, 15vw, 120px) clamp(20px, 5vw, 48px);
+            background: var(--gray-900);
+        }
+
+        .featured-content {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .featured-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(60px, 10vw, 80px);
+            align-items: center;
+        }
+
+        .featured-visual {
+            position: relative;
+            height: clamp(300px, 40vw, 450px);
+            background: linear-gradient(135deg, var(--purple-accent), var(--blue-accent));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .featured-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="neural" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="2" fill="rgba(255,255,255,0.1)"/><line x1="12.5" y1="0" x2="12.5" y2="25" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><line x1="0" y1="12.5" x2="25" y2="12.5" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23neural)"/></svg>');
+            animation: slidePattern 20s linear infinite;
+        }
+
+        @keyframes slidePattern {
+            from { transform: translateX(0) translateY(0); }
+            to { transform: translateX(-25px) translateY(-25px); }
+        }
+
+        .featured-icon {
+            font-size: 80px;
+            z-index: 2;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .featured-text h2 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: clamp(20px, 3vw, 24px);
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .featured-text .meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        .featured-text p {
+            font-size: clamp(16px, 3vw, 20px);
+            color: var(--gray-400);
+            line-height: 1.6;
+            margin-bottom: clamp(24px, 4vw, 32px);
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .read-more-btn:hover {
+            background: var(--gray-200);
+            transform: translateY(-2px);
+        }
+
+        .read-more-btn::after {
+            content: '→';
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-btn:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* News Categories */
+        .categories {
+            padding: clamp(80px, 15vw, 120px) clamp(20px, 5vw, 48px);
+            background: var(--black);
+        }
+
+        .categories-content {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: clamp(48px, 8vw, 80px);
+            text-align: center;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: 1px;
+            background: var(--gray-800);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .category-item {
+            background: var(--gray-900);
+            padding: clamp(32px, 5vw, 40px);
+            transition: all 0.4s ease;
+            position: relative;
+            min-height: clamp(200px, 30vw, 240px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            background: var(--black);
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-800);
+            border: 2px solid var(--gray-600);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+            font-size: 20px;
+        }
+
+        .category-item:hover .category-icon {
+            background: var(--white);
+            border-color: var(--white);
+            color: var(--black);
+            transform: scale(1.1);
+        }
+
+        .category-title {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 600;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: clamp(80px, 15vw, 120px) clamp(20px, 5vw, 48px);
+            background: linear-gradient(135deg, var(--gray-900), var(--black));
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: clamp(20px, 3vw, 24px);
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .newsletter p {
+            font-size: clamp(16px, 3vw, 18px);
+            color: var(--gray-400);
+            line-height: 1.6;
+            margin-bottom: clamp(32px, 5vw, 40px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 16px 20px;
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--gray-500);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--white);
+        }
+
+        .newsletter-submit {
+            padding: 16px 24px;
+            background: var(--white);
+            color: var(--black);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .newsletter-submit:hover {
+            background: var(--gray-200);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--gray-800);
+            padding: clamp(60px, 10vw, 80px) clamp(20px, 5vw, 48px) clamp(32px, 5vw, 48px);
+        }
+
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: clamp(40px, 8vw, 80px);
+        }
+
+        .footer-main h3 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 800;
+            margin-bottom: clamp(16px, 3vw, 24px);
+            letter-spacing: -0.02em;
+        }
+
+        .footer-main p {
+            color: var(--gray-400);
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        .footer-section h4 {
+            font-size: clamp(14px, 2.5vw, 16px);
+            font-weight: 600;
+            margin-bottom: clamp(16px, 3vw, 24px);
+            color: var(--gray-300);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--gray-500);
+            text-decoration: none;
+            font-size: clamp(12px, 2vw, 14px);
+            margin-bottom: clamp(12px, 2vw, 16px);
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            margin-top: clamp(60px, 8vw, 80px);
+            padding-top: clamp(16px, 3vw, 24px);
+            border-top: 1px solid var(--gray-800);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: clamp(12px, 2vw, 14px);
+            color: var(--gray-500);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* Loading States */
+        .loading-skeleton {
+            background: linear-gradient(90deg, var(--gray-800) 25%, var(--gray-700) 50%, var(--gray-800) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .skeleton-title {
+            height: 24px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-text {
+            height: 16px;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-text:last-child {
+            width: 70%;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .featured-article {
+                grid-template-columns: 1fr;
+                gap: clamp(40px, 8vw, 60px);
+            }
+
+            .featured-visual {
+                order: -1;
+            }
+
+            .filters-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-tabs {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: clamp(32px, 6vw, 48px);
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .filter-tabs {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .filter-tabs::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* Custom Cursor Enhancement */
+        @media (min-width: 1025px) {
+            body {
+                cursor: none;
+            }
+
+            .cursor {
+                width: 12px;
+                height: 12px;
+                background: var(--white);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: difference;
+                transition: transform 0.15s ease;
+            }
+
+            .cursor.hover {
+                transform: scale(2.5);
+            }
+        }
+
+        /* Error States */
+        .error-message {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: #fca5a5;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--black);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 16px 0;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--gray-400);
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="index.html">Home</a>
+        <a href="careers.html">Careers</a>
+        <a href="#featured">Featured</a>
+        <a href="#categories">Categories</a>
+        <a href="#newsletter">Newsletter</a>
+        <a href="mailto:news@aidgorithm.com">Contact</a>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Aidgorithm</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="mailto:news@aidgorithm.com">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-ai">
+            <div class="ai-element">🤖</div>
+            <div class="ai-element">🧠</div>
+            <div class="ai-element">⚡</div>
+            <div class="ai-element">🔬</div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span>Live Updates</span>
+                </div>
+                <div class="text-caption">Real-Time Intelligence</div>
+            </div>
+            <h1 class="hero-title text-display">AI News<br>Central</h1>
+            <p class="hero-subtitle text-body">Stay ahead of the curve with the latest breakthroughs, research, and innovations in artificial intelligence and machine learning.</p>
+            <div class="last-updated" id="last-updated">
+                Last updated: <span id="update-time">Loading...</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Filters -->
+    <section class="filters">
+        <div class="filters-content">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">All News</button>
+                <button class="filter-tab" data-category="research">Research</button>
+                <button class="filter-tab" data-category="industry">Industry</button>
+                <button class="filter-tab" data-category="tools">Tools & Platforms</button>
+                <button class="filter-tab" data-category="policy">Policy & Ethics</button>
+            </div>
+            <button class="refresh-btn" id="refresh-btn">
+                <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23,4 23,10 17,10"/>
+                    <polyline points="1,20 1,14 7,14"/>
+                    <path d="M20.49,9A9,9,0,0,0,5.64,5.64L1,10"/>
+                    <path d="M3.51,15a9,9,0,0,0,14.85,3.36L23,14"/>
+                </svg>
+                Refresh
+            </button>
+        </div>
+    </section>
+
+    <!-- Featured Article Section -->
+    <section id="featured" class="featured-section fade-in">
+        <div class="featured-content">
+            <div class="featured-article">
+                <div class="featured-visual">
+                    <div class="featured-icon">🚀</div>
+                </div>
+                <div class="featured-text">
+                    <h2 class="text-display">AI Models Break New Ground</h2>
+                    <div class="meta">
+                        <span>Featured Story</span>
+                        <span>•</span>
+                        <span id="featured-date">August 31, 2025</span>
+                    </div>
+                    <p class="text-body">Recent developments in large language models and multimodal AI systems are reshaping how we interact with artificial intelligence, bringing us closer to more intuitive and powerful AI assistants.</p>
+                    <a href="#" class="read-more-btn">Read Full Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="news-grid fade-in">
+        <div class="news-header">
+            <h2 class="news-title text-display">Latest Updates</h2>
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span>Live</span>
+            </div>
+        </div>
+        
+        <div class="articles-grid" id="articles-grid">
+            <!-- Articles will be loaded here -->
+        </div>
+        
+        <div id="loading-articles" style="display: none;">
+            <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-image">
+                        <div class="loading-skeleton" style="width: 60px; height: 60px; border-radius: 50%;"></div>
+                    </div>
+                    <div class="article-content">
+                        <div class="loading-skeleton skeleton-title"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">
+                        <div class="loading-skeleton" style="width: 60px; height: 60px; border-radius: 50%;"></div>
+                    </div>
+                    <div class="article-content">
+                        <div class="loading-skeleton skeleton-title"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <div class="article-image">
+                        <div class="loading-skeleton" style="width: 60px; height: 60px; border-radius: 50%;"></div>
+                    </div>
+                    <div class="article-content">
+                        <div class="loading-skeleton skeleton-title"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                        <div class="loading-skeleton skeleton-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories fade-in">
+        <div class="categories-content">
+            <h2 class="section-title text-display">Browse by Category</h2>
+            <div class="categories-grid">
+                <div class="category-item" data-category="research">
+                    <div class="category-icon">🔬</div>
+                    <div>
+                        <h3 class="category-title text-title">Research & Breakthroughs</h3>
+                        <p class="category-count" id="research-count">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="category-item" data-category="industry">
+                    <div class="category-icon">🏢</div>
+                    <div>
+                        <h3 class="category-title text-title">Industry News</h3>
+                        <p class="category-count" id="industry-count">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="category-item" data-category="tools">
+                    <div class="category-icon">🛠️</div>
+                    <div>
+                        <h3 class="category-title text-title">Tools & Platforms</h3>
+                        <p class="category-count" id="tools-count">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="category-item" data-category="policy">
+                    <div class="category-icon">⚖️</div>
+                    <div>
+                        <h3 class="category-title text-title">Policy & Ethics</h3>
+                        <p class="category-count" id="policy-count">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="category-item" data-category="startups">
+                    <div class="category-icon">🚀</div>
+                    <div>
+                        <h3 class="category-title text-title">Startups & Funding</h3>
+                        <p class="category-count" id="startups-count">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="category-item" data-category="hardware">
+                    <div class="category-icon">💻</div>
+                    <div>
+                        <h3 class="category-title text-title">Hardware & Computing</h3>
+                        <p class="category-count" id="hardware-count">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter fade-in">
+        <div class="newsletter-content">
+            <h2 class="text-display">Stay Informed</h2>
+            <p class="text-body">Get the most important AI news delivered to your inbox. Join thousands of researchers, developers, and innovators who rely on our curated updates.</p>
+            <form class="newsletter-form" id="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer fade-in">
+        <div class="footer-content">
+            <div class="footer-main">
+                <h3 class="text-title">Intelligence Updates</h3>
+                <p class="text-body">Your source for the latest developments in artificial intelligence, machine learning, and the future of technology. Updated continuously to keep you ahead of the curve.</p>
+            </div>
+            <div class="footer-section">
+                <h4 class="text-title">Quick Links</h4>
+                <a href="index.html">Main Website</a>
+                <a href="careers.html">Careers</a>
+                <a href="#featured">Featured Stories</a>
+                <a href="#categories">Browse Categories</a>
+            </div>
+            <div class="footer-section">
+                <h4 class="text-title">Resources</h4>
+                <a href="#">Research Papers</a>
+                <a href="#">AI Tools Directory</a>
+                <a href="#">Industry Reports</a>
+                <a href="#">Glossary</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aidgorithm. All rights reserved.</p>
+            <p>Powered by real-time AI intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample AI news data structure
+        const aiNewsData = [
+            {
+                id: 1,
+                title: "Advanced Reasoning Models Show Human-Level Performance",
+                summary: "Latest AI models demonstrate unprecedented capabilities in complex reasoning tasks, approaching human-level performance in mathematical and logical problem-solving.",
+                category: "research",
+                icon: "🧠",
+                tags: ["reasoning", "benchmarks", "performance"],
+                date: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
+                source: "AI Research Lab"
+            },
+            {
+                id: 2,
+                title: "Major Tech Companies Announce AI Safety Collaboration",
+                summary: "Leading technology firms establish new partnership focused on developing safer, more aligned artificial intelligence systems for enterprise deployment.",
+                category: "industry",
+                icon: "🤝",
+                tags: ["safety", "collaboration", "enterprise"],
+                date: new Date(Date.now() - Math.random() * 5 * 24 * 60 * 60 * 1000),
+                source: "Tech Industry News"
+            },
+            {
+                id: 3,
+                title: "Revolutionary Multimodal AI Platform Launches",
+                summary: "New platform enables seamless integration of text, image, and audio processing in a single unified model, opening possibilities for more intuitive AI interactions.",
+                category: "tools",
+                icon: "🎯",
+                tags: ["multimodal", "platform", "integration"],
+                date: new Date(Date.now() - Math.random() * 3 * 24 * 60 * 60 * 1000),
+                source: "AI Platform Review"
+            },
+            {
+                id: 4,
+                title: "New AI Governance Framework Proposed",
+                summary: "Comprehensive framework for AI governance addresses transparency, accountability, and ethical considerations in artificial intelligence development and deployment.",
+                category: "policy",
+                icon: "⚖️",
+                tags: ["governance", "ethics", "policy"],
+                date: new Date(Date.now() - Math.random() * 4 * 24 * 60 * 60 * 1000),
+                source: "Policy Institute"
+            },
+            {
+                id: 5,
+                title: "AI Startup Raises Record $500M Series B",
+                summary: "Emerging AI company focused on enterprise automation secures significant funding to accelerate development of intelligent business process solutions.",
+                category: "startups",
+                icon: "💰",
+                tags: ["funding", "startup", "automation"],
+                date: new Date(Date.now() - Math.random() * 2 * 24 * 60 * 60 * 1000),
+                source: "Venture Capital Today"
+            },
+            {
+                id: 6,
+                title: "Next-Generation AI Chips Deliver 10x Performance",
+                summary: "New specialized processors designed for AI workloads offer dramatic improvements in efficiency and speed, enabling more complex models to run locally.",
+                category: "hardware",
+                icon: "⚡",
+                tags: ["hardware", "performance", "efficiency"],
+                date: new Date(Date.now() - Math.random() * 6 * 24 * 60 * 60 * 1000),
+                source: "Hardware Tech Review"
+            },
+            {
+                id: 7,
+                title: "Breakthrough in AI-Human Collaboration Research",
+                summary: "New studies reveal optimal patterns for human-AI teamwork, showing how artificial intelligence can augment rather than replace human creativity and decision-making.",
+                category: "research",
+                icon: "🤖",
+                tags: ["collaboration", "human-ai", "augmentation"],
+                date: new Date(Date.now() - Math.random() * 1 * 24 * 60 * 60 * 1000),
+                source: "Human-AI Research Center"
+            },
+            {
+                id: 8,
+                title: "Open Source AI Model Challenges Proprietary Systems",
+                summary: "Community-driven AI model achieves competitive performance with commercial alternatives, demonstrating the power of collaborative development in artificial intelligence.",
+                category: "tools",
+                icon: "🌐",
+                tags: ["open-source", "community", "models"],
+                date: new Date(Date.now() - Math.random() * 8 * 24 * 60 * 60 * 1000),
+                source: "Open AI Community"
+            }
+        ];
+
+        // Global state
+        let currentFilter = 'all';
+        let allArticles = [...aiNewsData];
+
+        // Enhanced cursor
+        const cursor = document.querySelector('.cursor');
+        if (cursor && window.innerWidth > 1024) {
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Cursor hover effects
+            document.querySelectorAll('a, button, .article-card, .category-item, .filter-tab').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+            });
+        }
+
+        // Navigation
+        const nav = document.querySelector('.nav');
+        const mobileNav = document.getElementById('mobile-nav');
+        const menuToggle = document.getElementById('menu-toggle');
+        
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > lastScrollY && window.scrollY > 200) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // Mobile menu toggle
+        if (menuToggle && mobileNav) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            });
+
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = window.innerWidth <= 768 ? 80 : 100;
+                    const targetPosition = target.offsetTop - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Format date helper
+        function formatDate(date) {
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffHours < 1) return 'Just now';
+            if (diffHours < 24) return `${diffHours}h ago`;
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            
+            return date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric',
+                year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+            });
+        }
+
+        // Render articles
+        function renderArticles(articles) {
+            const grid = document.getElementById('articles-grid');
+            
+            if (articles.length === 0) {
+                grid.innerHTML = `
+                    <div class="error-message">
+                        <p>No articles found for the selected category.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = articles.map(article => `
+                <article class="article-card" data-category="${article.category}">
+                    <div class="article-image">
+                        <div class="article-icon">${article.icon}</div>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">${article.category}</span>
+                            <span class="article-date">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                ${formatDate(article.date)}
+                            </span>
+                        </div>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-summary">${article.summary}</p>
+                        <div class="article-tags">
+                            ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+
+            // Add click handlers for articles
+            document.querySelectorAll('.article-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    // In a real implementation, this would navigate to the full article
+                    console.log('Navigate to article:', card.querySelector('.article-title').textContent);
+                });
+            });
+        }
+
+        // Filter functionality
+        function filterArticles(category) {
+            const filtered = category === 'all' 
+                ? allArticles 
+                : allArticles.filter(article => article.category === category);
+            
+            renderArticles(filtered);
+            updateCategoryCounts();
+        }
+
+        // Update category counts
+        function updateCategoryCounts() {
+            const counts = allArticles.reduce((acc, article) => {
+                acc[article.category] = (acc[article.category] || 0) + 1;
+                return acc;
+            }, {});
+
+            document.getElementById('research-count').textContent = `${counts.research || 0} articles`;
+            document.getElementById('industry-count').textContent = `${counts.industry || 0} articles`;
+            document.getElementById('tools-count').textContent = `${counts.tools || 0} articles`;
+            document.getElementById('policy-count').textContent = `${counts.policy || 0} articles`;
+            document.getElementById('startups-count').textContent = `${counts.startups || 0} articles`;
+            document.getElementById('hardware-count').textContent = `${counts.hardware || 0} articles`;
+        }
+
+        // Filter tab handlers
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                currentFilter = tab.dataset.category;
+                filterArticles(currentFilter);
+            });
+        });
+
+        // Category click handlers
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const category = item.dataset.category;
+                
+                // Update active filter tab
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector(`[data-category="${category}"]`).classList.add('active');
+                
+                currentFilter = category;
+                filterArticles(category);
+                
+                // Scroll to news grid
+                document.querySelector('.news-grid').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Refresh functionality
+        document.getElementById('refresh-btn').addEventListener('click', async () => {
+            const refreshBtn = document.getElementById('refresh-btn');
+            const articlesGrid = document.getElementById('articles-grid');
+            const loadingDiv = document.getElementById('loading-articles');
+            
+            // Show loading state
+            refreshBtn.classList.add('loading');
+            articlesGrid.style.display = 'none';
+            loadingDiv.style.display = 'block';
+            
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Simulate adding new articles (in real implementation, this would fetch from API)
+            const newArticle = {
+                id: allArticles.length + 1,
+                title: "Real-Time AI Model Updates Show Promising Results",
+                summary: "Latest developments in continuous learning AI systems demonstrate ability to adapt and improve performance in real-time applications.",
+                category: "research",
+                icon: "⚡",
+                tags: ["real-time", "continuous-learning", "adaptation"],
+                date: new Date(),
+                source: "AI Innovation Hub"
+            };
+            
+            allArticles.unshift(newArticle);
+            
+            // Update display
+            filterArticles(currentFilter);
+            updateLastUpdated();
+            
+            // Hide loading state
+            refreshBtn.classList.remove('loading');
+            loadingDiv.style.display = 'none';
+            articlesGrid.style.display = 'grid';
+        });
+
+        // Newsletter form
+        document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            
+            // Simulate subscription
+            alert('Thank you for subscribing! You\'ll receive our latest AI updates.');
+            e.target.querySelector('input').value = '';
+        });
+
+        // Update last updated time
+        function updateLastUpdated() {
+            const now = new Date();
+            document.getElementById('update-time').textContent = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            document.getElementById('featured-date').textContent = now.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Auto-refresh every 5 minutes
+        setInterval(() => {
+            // In real implementation, this would fetch new articles from API
+            updateLastUpdated();
+        }, 300000); // 5 minutes
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for floating AI elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const aiElements = document.querySelectorAll('.ai-element');
+            
+            aiElements.forEach((element, index) => {
+                const speed = 0.02 + (index * 0.01);
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.05}deg)`;
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderArticles(allArticles);
+            updateCategoryCounts();
+            updateLastUpdated();
+            
+            // Simulate real-time updates
+            setTimeout(() => {
+                const newUpdate = {
+                    id: allArticles.length + 1,
+                    title: "AI Model Achieves New Benchmark in Code Generation",
+                    summary: "Latest language model demonstrates superior performance in automated code generation tasks, showing significant improvements in accuracy and efficiency.",
+                    category: "research",
+                    icon: "💻",
+                    tags: ["coding", "benchmark", "automation"],
+                    date: new Date(),
+                    source: "Code AI Research"
+                };
+                
+                allArticles.unshift(newUpdate);
+                
+                if (currentFilter === 'all' || currentFilter === 'research') {
+                    renderArticles(allArticles.filter(article => 
+                        currentFilter === 'all' || article.category === currentFilter
+                    ));
+                }
+                updateCategoryCounts();
+                updateLastUpdated();
+                
+                // Show notification for new article
+                showNotification('New AI article added!');
+            }, 30000); // Add new article after 30 seconds
+        });
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--green-accent);
+                color: var(--black);
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 14px;
+                z-index: 10000;
+                transform: translateX(100%);
+                transition: transform 0.4s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 400);
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                document.getElementById('refresh-btn').click();
+            }
+            
+            // Number keys for category filters
+            const categories = ['all', 'research', 'industry', 'tools', 'policy'];
+            const keyNumber = parseInt(e.key);
+            if (keyNumber >= 1 && keyNumber <= categories.length) {
+                const targetCategory = categories[keyNumber - 1];
+                document.querySelector(`[data-category="${targetCategory}"]`).click();
+            }
+        });
+
+        // Search functionality
+        function addSearchFunctionality() {
+            const searchContainer = document.createElement('div');
+            searchContainer.style.cssText = `
+                position: relative;
+                max-width: 300px;
+            `;
+            
+            const searchInput = document.createElement('input');
+            searchInput.type = 'text';
+            searchInput.placeholder = 'Search AI news...';
+            searchInput.style.cssText = `
+                width: 100%;
+                padding: 12px 40px 12px 16px;
+                background: var(--gray-800);
+                border: 1px solid var(--gray-700);
+                border-radius: 8px;
+                color: var(--white);
+                font-size: 14px;
+                font-family: inherit;
+            `;
+            
+            const searchIcon = document.createElement('div');
+            searchIcon.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+            `;
+            searchIcon.style.cssText = `
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--gray-500);
+                pointer-events: none;
+            `;
+            
+            searchContainer.appendChild(searchInput);
+            searchContainer.appendChild(searchIcon);
+            
+            // Add search container to filters
+            document.querySelector('.filters-content').appendChild(searchContainer);
+            
+            // Search functionality
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const query = e.target.value.toLowerCase();
+                    let filtered = allArticles;
+                    
+                    if (query) {
+                        filtered = allArticles.filter(article =>
+                            article.title.toLowerCase().includes(query) ||
+                            article.summary.toLowerCase().includes(query) ||
+                            article.tags.some(tag => tag.toLowerCase().includes(query))
+                        );
+                    }
+                    
+                    if (currentFilter !== 'all') {
+                        filtered = filtered.filter(article => article.category === currentFilter);
+                    }
+                    
+                    renderArticles(filtered);
+                }, 300);
+            });
+        }
+
+        // Add search after DOM is loaded
+        addSearchFunctionality();
+
+        // Real-time clock update
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            
+            const timeElements = document.querySelectorAll('#update-time');
+            timeElements.forEach(el => {
+                if (el) el.textContent = timeString;
+            });
+        }
+
+        // Update clock every second
+        setInterval(updateClock, 1000);
+
+        // Simulate periodic news updates
+        function simulateNewsUpdates() {
+            const newsTemplates = [
+                {
+                    title: "AI Safety Protocols Receive Industry-Wide Adoption",
+                    summary: "Major AI companies implement standardized safety protocols following recent collaborative framework development.",
+                    category: "policy",
+                    icon: "🛡️",
+                    tags: ["safety", "protocols", "standards"]
+                },
+                {
+                    title: "Quantum-AI Hybrid System Achieves New Milestones",
+                    summary: "Researchers demonstrate quantum-enhanced machine learning algorithms that significantly outperform classical approaches.",
+                    category: "research",
+                    icon: "⚛️",
+                    tags: ["quantum", "hybrid", "algorithms"]
+                },
+                {
+                    title: "Edge AI Deployment Reaches New Scale",
+                    summary: "Latest edge computing solutions enable complex AI models to run efficiently on mobile and IoT devices.",
+                    category: "hardware",
+                    icon: "📱",
+                    tags: ["edge-ai", "mobile", "iot"]
+                }
+            ];
+            
+            setInterval(() => {
+                const template = newsTemplates[Math.floor(Math.random() * newsTemplates.length)];
+                const newArticle = {
+                    ...template,
+                    id: Date.now(),
+                    date: new Date(),
+                    source: "Live AI Feed"
+                };
+                
+                allArticles.unshift(newArticle);
+                
+                // Keep only latest 20 articles to prevent infinite growth
+                if (allArticles.length > 20) {
+                    allArticles = allArticles.slice(0, 20);
+                }
+                
+                // Update display if viewing all or matching category
+                if (currentFilter === 'all' || currentFilter === newArticle.category) {
+                    filterArticles(currentFilter);
+                }
+                
+                updateLastUpdated();
+                showNotification(`New ${newArticle.category} article: ${newArticle.title.substring(0, 40)}...`);
+            }, 120000); // Add new article every 2 minutes
+        }
+
+        // Start simulated updates
+        simulateNewsUpdates();
+
+        // Performance optimization: Lazy loading for images
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        imageObserver.unobserve(img);
+                    }
+                }
+            });
+        });
+
+        // Theme detection and adaptation
+        function detectSystemTheme() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                // User prefers light mode, but we'll keep our dark theme
+                // Could add a theme toggle here in the future
+            }
+        }
+
+        detectSystemTheme();
+
+        // Add keyboard accessibility
+        document.addEventListener('keydown', (e) => {
+            // Tab navigation for articles
+            if (e.key === 'Tab') {
+                const articles = document.querySelectorAll('.article-card');
+                articles.forEach(article => {
+                    article.setAttribute('tabindex', '0');
+                });
+            }
+            
+            // Enter key for article selection
+            if (e.key === 'Enter' && document.activeElement.classList.contains('article-card')) {
+                document.activeElement.click();
+            }
+        });
+
+        // Analytics simulation (in real app, this would connect to analytics service)
+        function trackEvent(eventName, properties = {}) {
+            console.log(`Analytics Event: ${eventName}`, properties);
+        }
+
+        // Track filter usage
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                trackEvent('filter_used', { category: tab.dataset.category });
+            });
+        });
+
+        // Track article interactions
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.article-card')) {
+                const article = e.target.closest('.article-card');
+                const title = article.querySelector('.article-title').textContent;
+                trackEvent('article_clicked', { title, category: article.dataset.category });
+            }
+        });
+
+        // Add error handling for failed loads
+        window.addEventListener('error', (e) => {
+            console.error('Page error:', e.error);
+            // In production, this would report to error monitoring service
+        });
+
+        // Service worker registration for offline functionality (placeholder)
+        if ('serviceWorker' in navigator) {
+            // In a real implementation, register service worker for offline news caching
+            console.log('Service Worker support detected - offline functionality could be implemented');
+        }
+
+        // Initialize tooltips for better UX
+        function initializeTooltips() {
+            const tooltipElements = document.querySelectorAll('[data-tooltip]');
+            tooltipElements.forEach(element => {
+                element.addEventListener('mouseenter', (e) => {
+                    // Tooltip implementation would go here
+                });
+            });
+        }
+
+        initializeTooltips();
+    </script>
+</body>
+</html>
