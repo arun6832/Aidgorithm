@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Aidgorithm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --accent: #ffffff;
+            --blue-accent: #0066cc;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+            line-height: 1.4;
+            color: var(--white);
+            background: var(--black);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+            overflow-x: hidden;
+        }
+
+        /* Apple-style Typography System */
+        .text-display {
+            font-family: 'SF Pro Display', 'Inter', system-ui, sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.022em;
+        }
+
+        .text-title {
+            font-family: 'SF Pro Text', 'Inter', system-ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.016em;
+        }
+
+        .text-body {
+            font-family: 'SF Pro Text', 'Inter', system-ui, sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.008em;
+        }
+
+        .text-caption {
+            font-family: 'SF Pro Text', 'Inter', system-ui, sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.012em;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: clamp(16px, 3vw, 24px) clamp(20px, 5vw, 48px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid var(--gray-800);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: clamp(20px, 4vw, 26px);
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(24px, 5vw, 48px);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: clamp(14px, 2.5vw, 16px);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--white);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .menu-line {
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--black);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 16px 0;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--gray-400);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 clamp(20px, 5vw, 48px);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-eyebrow {
+            font-size: clamp(12px, 2vw, 14px);
+            font-weight: 600;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: clamp(16px, 3vw, 24px);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.2s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 10vw, 88px);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.035em;
+            margin-bottom: clamp(24px, 4vw, 32px);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.4s forwards;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 400;
+            color: var(--gray-300);
+            line-height: 1.6;
+            margin-bottom: clamp(32px, 5vw, 48px);
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.6s forwards;
+        }
+
+        .career-highlight {
+            display: inline-block;
+            background: var(--white);
+            color: var(--black);
+            padding: 6px 16px;
+            border-radius: 0;
+            border: 1px solid var(--white);
+            font-size: clamp(12px, 2vw, 14px);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0 8px 8px 0;
+            opacity: 0;
+            animation: fadeUp 1s ease-out 0.8s forwards;
+            transition: all 0.3s ease;
+        }
+
+        .career-highlight:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Floating 3D Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+        }
+
+        .shape-1 {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            top: 60%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 50%;
+            bottom: 30%;
+            left: 20%;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .shape-4 {
+            width: 100px;
+            height: 2px;
+            background: var(--gray-600);
+            top: 40%;
+            right: 20%;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Culture Section */
+        .culture {
+            padding: clamp(80px, 15vw, 120px) clamp(20px, 5vw, 48px);
+            background: var(--gray-900);
+        }
+
+        .culture-content {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: clamp(48px, 8vw, 80px);
+            text-align: center;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: 1px;
+            background: var(--gray-800);
+        }
+
+        .culture-item {
+            background: var(--black);
+            padding: clamp(40px, 6vw, 56px);
+            transition: all 0.4s ease;
+            position: relative;
+            min-height: clamp(280px, 40vw, 320px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .culture-item:hover {
+            background: var(--gray-900);
+            transform: translateY(-4px);
+        }
+
+        .culture-icon {
+            width: clamp(48px, 8vw, 64px);
+            height: clamp(48px, 8vw, 64px);
+            background: var(--gray-800);
+            border: 2px solid var(--gray-600);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: clamp(24px, 4vw, 32px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-icon svg {
+            width: clamp(20px, 4vw, 28px);
+            height: clamp(20px, 4vw, 28px);
+            stroke: var(--gray-400);
+            fill: none;
+            stroke-width: 2;
+            transition: all 0.4s ease;
+        }
+
+        .culture-item:hover .culture-icon {
+            background: var(--white);
+            border-color: var(--white);
+            transform: translateY(-4px);
+        }
+
+        .culture-item:hover .culture-icon svg {
+            stroke: var(--black);
+            transform: scale(1.1);
+        }
+
+        .culture-item:hover .culture-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 0.6s ease-out;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .culture-title {
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            margin-bottom: clamp(16px, 3vw, 20px);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .culture-description {
+            font-size: clamp(15px, 2.5vw, 18px);
+            color: var(--gray-400);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: clamp(80px, 15vw, 120px) clamp(20px, 5vw, 48px);
+        }
+
+        .benefits-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(60px, 10vw, 100px);
+            align-items: center;
+        }
+
+        .benefits-text h2 {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: clamp(24px, 4vw, 32px);
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .benefits-text p {
+            font-size: clamp(16px, 3vw, 20px);
+            color: var(--gray-400);
+            line-height: 1.6;
+            margin-bottom: clamp(24px, 4vw, 32px);
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            font-size: clamp(15px, 2.5vw, 18px);
+            color: var(--gray-300);
+            margin-bottom: clamp(16px, 3vw, 20px);
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--white);
+            font-weight: bold;
+            font-size: clamp(16px, 3vw, 18px);
+        }
+
+        .benefits-visual {
+            position: relative;
+            height: clamp(300px, 40vw, 500px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remote-globe {
+            width: clamp(250px, 35vw, 350px);
+            height: clamp(250px, 35vw, 350px);
+            border: 2px solid var(--gray-700);
+            border-radius: 50%;
+            position: relative;
+            animation: rotate 20s linear infinite;
+        }
+
+        .remote-globe::before {
+            content: '🌍';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(60px, 10vw, 80px);
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            border-radius: 50%;
+            animation: orbit 8s linear infinite;
+        }
+
+        .orbit-dot:nth-child(2) {
+            animation-delay: -2s;
+        }
+
+        .orbit-dot:nth-child(3) {
+            animation-delay: -4s;
+        }
+
+        .orbit-dot:nth-child(4) {
+            animation-delay: -6s;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes orbit {
+            from {
+                transform: rotate(0deg) translateX(150px) rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+            }
+        }
+
+        /* Current Status Section */
+        .status {
+            padding: clamp(80px, 15vw, 120px) clamp(20px, 5vw, 48px);
+            background: linear-gradient(135deg, var(--gray-900), var(--black));
+            text-align: center;
+        }
+
+        .status-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .status h2 {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: clamp(24px, 4vw, 32px);
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .status-message {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--gray-400);
+            line-height: 1.6;
+            margin-bottom: clamp(32px, 5vw, 48px);
+        }
+
+        .future-highlight {
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            border-radius: 0;
+            padding: clamp(32px, 6vw, 48px);
+            margin-bottom: clamp(32px, 5vw, 48px);
+        }
+
+        .future-highlight h3 {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 700;
+            margin-bottom: clamp(16px, 3vw, 20px);
+            color: var(--white);
+        }
+
+        .future-highlight p {
+            font-size: clamp(16px, 3vw, 18px);
+            color: var(--gray-300);
+            line-height: 1.6;
+        }
+
+        .notify-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: clamp(16px, 3vw, 20px) clamp(32px, 6vw, 48px);
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-size: clamp(16px, 3vw, 18px);
+            font-weight: 600;
+            border-radius: 0;
+            transition: all 0.4s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .notify-btn:hover {
+            background: var(--gray-200);
+            transform: translateY(-2px);
+        }
+
+        .notify-btn::after {
+            content: '→';
+            font-size: clamp(16px, 3vw, 20px);
+            transition: transform 0.3s ease;
+        }
+
+        .notify-btn:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--gray-800);
+            padding: clamp(60px, 10vw, 80px) clamp(20px, 5vw, 48px) clamp(32px, 5vw, 48px);
+        }
+
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: clamp(40px, 8vw, 80px);
+        }
+
+        .footer-main h3 {
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 800;
+            margin-bottom: clamp(16px, 3vw, 24px);
+            letter-spacing: -0.02em;
+        }
+
+        .footer-main p {
+            color: var(--gray-400);
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        .footer-section h4 {
+            font-size: clamp(14px, 2.5vw, 16px);
+            font-weight: 600;
+            margin-bottom: clamp(16px, 3vw, 24px);
+            color: var(--gray-300);
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--gray-500);
+            text-decoration: none;
+            font-size: clamp(12px, 2vw, 14px);
+            margin-bottom: clamp(12px, 2vw, 16px);
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            margin-top: clamp(60px, 8vw, 80px);
+            padding-top: clamp(16px, 3vw, 24px);
+            border-top: 1px solid var(--gray-800);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: clamp(12px, 2vw, 14px);
+            color: var(--gray-500);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .benefits-content {
+                grid-template-columns: 1fr;
+                gap: clamp(40px, 8vw, 60px);
+            }
+
+            .benefits-visual {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: clamp(32px, 6vw, 48px);
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Cursor Enhancement */
+        @media (min-width: 1025px) {
+            body {
+                cursor: none;
+            }
+
+            .cursor {
+                width: 12px;
+                height: 12px;
+                background: var(--white);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: difference;
+                transition: transform 0.15s ease;
+            }
+
+            .cursor.hover {
+                transform: scale(2.5);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            animation: fadeInLoad 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInLoad {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="index.html">Home</a>
+        <a href="#culture">Culture</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#openings">Openings</a>
+        <a href="mailto:careers@aidgorithm.com">Contact</a>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Aidgorithm</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#culture">Culture</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#openings">Openings</a></li>
+                <li><a href="mailto:careers@aidgorithm.com">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+        
+        <div class="hero-content loading">
+            <div class="hero-eyebrow text-caption">Join Our Mission</div>
+            <h1 class="hero-title text-display">Build Tomorrow's<br>Intelligence</h1>
+            <p class="hero-subtitle text-body">We're looking for curious minds, fresh perspectives, and innovative thinkers who want to shape the future of AI and enterprise technology.</p>
+            <div>
+                <span class="career-highlight">Remote-First</span>
+                <span class="career-highlight">Student-Friendly</span>
+                <span class="career-highlight">Research-Driven</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section id="culture" class="culture fade-in">
+        <div class="culture-content">
+            <h2 class="section-title text-display">Our Culture</h2>
+            <div class="culture-grid">
+                <div class="culture-item">
+                    <div class="culture-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="culture-title text-title">Work From Anywhere</h3>
+                    <p class="culture-description text-body">True remote-first culture. Work from your home office, a café in Tokyo, or a co-working space in Berlin. We believe great work happens when you're comfortable and inspired.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <div class="culture-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                            <path d="M8 14h.01"/>
+                            <path d="M12 14h.01"/>
+                            <path d="M16 14h.01"/>
+                            <path d="M8 18h.01"/>
+                            <path d="M12 18h.01"/>
+                            <path d="M16 18h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="culture-title text-title">Fresh Minds First</h3>
+                    <p class="culture-description text-body">Students and recent graduates get priority consideration. We value curiosity, eagerness to learn, and fresh perspectives over years of experience doing things the same way.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <div class="culture-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="culture-title text-title">Research Mentality</h3>
+                    <p class="culture-description text-body">Every project is an opportunity to discover something new. We encourage experimentation, embrace intelligent failures, and celebrate breakthrough moments.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <div class="culture-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+                        </svg>
+                    </div>
+                    <h3 class="culture-title text-title">Rapid Innovation</h3>
+                    <p class="culture-description text-body">Move fast, think differently, build boldly. We ship quickly, iterate constantly, and aren't afraid to challenge conventional wisdom in our pursuit of better solutions.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <div class="culture-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3 class="culture-title text-title">Collaborative Growth</h3>
+                    <p class="culture-description text-body">Learn from everyone, teach what you know. We foster an environment where knowledge sharing, mentorship, and continuous learning are part of our daily rhythm.</p>
+                </div>
+                
+                <div class="culture-item">
+                    <div class="culture-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88 16.24,7.76"/>
+                        </svg>
+                    </div>
+                    <h3 class="culture-title text-title">Impact-Focused</h3>
+                    <p class="culture-description text-body">Every line of code, every algorithm, every decision should move the needle. We measure success by the real-world problems we solve and the value we create.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits fade-in">
+        <div class="benefits-content">
+            <div class="benefits-text">
+                <h2 class="text-display">Why Join Aidgorithm?</h2>
+                <p class="text-body">We're building the future of intelligent systems, and we want you to be part of that journey. Here's what makes working with us unique:</p>
+                <ul class="benefits-list">
+                    <li>100% remote work with flexible hours across time zones</li>
+                    <li>Competitive compensation with equity participation</li>
+                    <li>Professional development budget for courses, conferences, and certifications</li>
+                    <li>Access to cutting-edge AI tools and cloud computing resources</li>
+                    <li>Direct mentorship from experienced engineers and researchers</li>
+                    <li>Opportunity to work on diverse projects across multiple industries</li>
+                    <li>Flexible time off policy with mental health support</li>
+                    <li>Home office setup stipend and co-working space allowances</li>
+                </ul>
+            </div>
+            <div class="benefits-visual">
+                <div class="remote-globe">
+                    <div class="orbit-dot"></div>
+                    <div class="orbit-dot"></div>
+                    <div class="orbit-dot"></div>
+                    <div class="orbit-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Status Section -->
+    <section id="openings" class="status fade-in">
+        <div class="status-content">
+            <h2 class="text-display">Current Opportunities</h2>
+            <p class="status-message text-body">We're currently focused on perfecting our existing solutions and preparing for our next phase of growth. While we don't have open positions right now, we're always interested in connecting with talented individuals.</p>
+            
+            <div class="future-highlight">
+                <h3 class="text-title">What's Coming Next</h3>
+                <p class="text-body">As we expand our AI capabilities and take on more complex enterprise challenges, we'll be looking for talented developers, researchers, and strategists to join our mission. Be the first to know about new opportunities.</p>
+            </div>
+            
+            <a href="mailto:careers@aidgorithm.com" class="notify-btn">Stay Updated</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer fade-in">
+        <div class="footer-content">
+            <div class="footer-main">
+                <h3 class="text-title">Ready to Innovate?</h3>
+                <p class="text-body">Even without current openings, we're always interested in connecting with exceptional talent. Reach out if you're passionate about AI and want to be part of something meaningful.</p>
+            </div>
+            <div class="footer-section">
+                <h4 class="text-title">Contact</h4>
+                <a href="mailto:careers@aidgorithm.com">careers@aidgorithm.com</a>
+                <a href="index.html">Main Website</a>
+                <a href="#culture">Our Culture</a>
+            </div>
+            <div class="footer-section">
+                <h4 class="text-title">Focus Areas</h4>
+                <a href="#">AI Development</a>
+                <a href="#">Machine Learning</a>
+                <a href="#">Enterprise Software</a>
+                <a href="#">Research & Innovation</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aidgorithm. All rights reserved.</p>
+            <p>Building tomorrow's intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced cursor
+        const cursor = document.querySelector('.cursor');
+        if (cursor && window.innerWidth > 1024) {
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Cursor hover effects
+            document.querySelectorAll('a, button, .culture-item, .career-highlight, .notify-btn').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+            });
+        }
+
+        // Navigation
+        const nav = document.querySelector('.nav');
+        const mobileNav = document.getElementById('mobile-nav');
+        const menuToggle = document.getElementById('menu-toggle');
+        
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // Hide nav on scroll down, show on scroll up
+            if (window.scrollY > lastScrollY && window.scrollY > 200) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // Mobile menu toggle
+        if (menuToggle && mobileNav) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            });
+
+            // Close mobile menu on link click
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Smooth scrolling with offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = window.innerWidth <= 768 ? 80 : 100;
+                    const targetPosition = target.offsetTop - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Enhanced Intersection Observer
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -10% 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .loading').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Menu toggle animation
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+            });
+        }
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.02 + (index * 0.01);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
